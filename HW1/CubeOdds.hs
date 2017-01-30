@@ -1,3 +1,3 @@
+module CubeOdds where
 cubeOdds :: [Integer] -> [Integer]
-
-cubeOdds a = [x*x*x | x <- a, odd x]
+cubeOdds xs = [if odd x then (x^3) else x | x <- xs]

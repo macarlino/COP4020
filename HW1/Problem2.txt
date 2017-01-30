@@ -1,10 +1,11 @@
 a. The only equivalent to [3,5,3] from the list was 5: "3:(5:(3:[]))"
-b.
-	1. The operation is not legal as it is an attempt to prepend a character with a list of characters
-	2. The operation is legal
-	3. The operation is legal
-	4. The operation is not legal because the ":" operator dictates the first is an element and the second is a list, both are the same type in this example.
-	5. The operation is legal
-	6. The operation is not legal as 1 is an integer and not a string
-c. Generates "([3,4,7,5,8],[3,4,7,5,8])". back is assigned all elements except the first, while front is assigned the first element. The tuple is then generated in (1st, front:back). 1st obviously is the passed in list whereas front:back is just the tail prepended with the head (or the same list)
 
+b.
+	1. The operation is not legal as it is an attempt to prepend a character with a list of characters (Can't append a list to a character).
+	2. The operation is legal.
+	3. The operation is not legal because the ":" operator dictates that for "a:b", a must be the element of type b (which is a list). Both are lists and so this is not legal.
+	4. The operation is not legal because the ":" operator dictates the first is an element and the second is a list (of the type of the first element before the : operator), both are the same type in this example so this is illegal.
+	5. The operation is legal.
+	6. The operation is not legal as 1 is an integer, which cannot be appended to a character list (different types).
+
+c. Generates "([3,4,7,5,8],[3,4,7,5,8])". back is assigned all elements except the first, while front is assigned the first element. The tuple is then generated in (1st, front:back). 1st obviously is the passed in list whereas front:back is just the tail prepended with the head (or the same list)
