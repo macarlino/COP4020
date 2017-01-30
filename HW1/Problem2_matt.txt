@@ -1,0 +1,15 @@
+a) #5 is the only one equivalent to [3,5,3]
+
+b)
+    1. append is only for lists; cannot append a list to a character
+    2. legal
+    3. the type of the two lists differ; cannot append two diff list types
+    4. same as previous, cannot append two diff list types
+    5. legal
+    6. cannot append a number to a character list
+    
+c)  back is set to the tail of the list (everything but the head).
+    front is set to just the head of the list.
+    (lst, front:back) creates an ordered pair of the two lists:
+        lst - which is the original list
+        front:back - which becomes a copy of the original list
