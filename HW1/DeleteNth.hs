@@ -8,8 +8,8 @@ deleteNth :: (Eq a) => Int -> a -> [a] -> [a]
 if deleteNth _  _ [] = []
 
 -- base case 2: if the count is 0, return the tail of the list (without the element a)
-if deleteNth 0 toDelete [list] = tail ([list])
+deleteNth 1 toDelete (x:xs) = if (toDelete == x) then xs else x : (deleteNth 1 toDelete xs)
 
 -- inductive step 1: decrement the count of the toDelete element if it matches (or don't if it doesn't) and pass recursive call to it
-if a == toDelete a : deleteNth n-1 toDelete tail(list)
-else a : deleteNth n toDelete tail(list)
+--if a == toDelete a : deleteNth n-1 toDelete tail(list)
+--else a : deleteNth n toDelete tail(list)
