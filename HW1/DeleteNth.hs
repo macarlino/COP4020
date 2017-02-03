@@ -1,3 +1,4 @@
+-- 3 Musketeers
 module DeleteNth where
 deleteNth :: (Eq a) => Int -> a -> [a] -> [a]
 
