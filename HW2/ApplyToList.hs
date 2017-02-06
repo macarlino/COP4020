@@ -12,9 +12,9 @@ applyToList :: (Eq k) => [k] -> (BinaryRelation k v) -> [v]
 applyRel _ [] = []
 applyRel ky pairs = [y | (x,y) <- pairs, ky == x]
 
+applyToList [] _ = []
 applyToList _ [] = []
-applyToList (k:keys) ((x,y):pairs) = (applyRel k ((x,y):pairs)) 
--- : applyToList keys ((x,y):pairs)
+applyToList (k:keys) ((x,y):pairs) = (applyRel k ((x,y):pairs)) ++ applyToList keys ((x,y):pairs)
 
 -- keys ["hello","goodbye"]
 -- pairs [("hello","Matt"),("goodbye","Bob"),("hello","Ryan")]
