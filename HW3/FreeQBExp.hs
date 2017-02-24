@@ -1,4 +1,4 @@
-module freeQBExp where
+module FreeQBExp where
 import QBExp
 
 {- data QBExp = Varref String | QBExp `Or` QBExp
