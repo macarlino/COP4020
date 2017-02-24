@@ -1,7 +1,8 @@
-module QBExp where
+module freeQBExp where
+import QBExp
 
-data QBExp = Varref String | QBExp `Or` QBExp
+{- data QBExp = Varref String | QBExp `Or` QBExp
            | Not QBExp | Exists String QBExp
-           deriving (Eq, Show)
+           deriving (Eq, Show) -}
 
 freeQBExp :: QBExp -> [String]
