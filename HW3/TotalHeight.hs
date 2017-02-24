@@ -30,3 +30,7 @@ totalHeight ((Horizontal ((Window n w h):xs))) = findMax h xs
 -- the height of a <WindowLayout> of the form
 -- Vertical [wl_1, .., wl_n] is the sum of the heights of wl_1 through wl_m
 -- which is 0 if the list is empty
+totalHeight ((Vertical ((Window n w h):xs))) = sumAll h xs
+    where
+        sumAll lastMax [] = lastMax
+        sumAll lastMax ((Window _ _ h):xs) = sumAll (h+lastMax) xs
