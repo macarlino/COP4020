@@ -15,16 +15,12 @@ totalHeight (Window _ _ h) = h
 -- otherwise is the maximum of the height of wl_1 through wl_m (inclusive)
 
 totalHeight (Horizontal []) = 0
---totalHeight (Horizontal xs) = [(Window wn w h) | (Window wn w h) <- xs]
-
-
 totalHeight ((Horizontal ((Window n w h):xs))) = findMax h xs
     where 
         findMax max [] = max
         findMax max ((Window _ _ h):xs) = if max > h 
                                           then findMax max xs 
                                           else findMax h xs
-
 
 
 -- the height of a <WindowLayout> of the form
