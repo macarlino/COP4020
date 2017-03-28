@@ -1,0 +1,11 @@
+Open Erlang by typing:
+    erl 
+    
+compile testing by typing:
+    c(testing).    <- make sure there is a space after the . everytime!!
+    
+compile the tests by typing:
+    c(concat_tests).     <- or whatever test file you need
+    
+run the tests by typing:
+    concat_tests:main().   <- or whatever test name it is.   file:Function(). 
