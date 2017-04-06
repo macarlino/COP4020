@@ -30,9 +30,10 @@ loop(Value) ->
     receive
         % makes the server continue with NewVal as its new value
         {assign, NewVal} ->
-            
+            loop(NewVal);
         % Value is the server's current value
         {Pid, fetch} ->
             Pid ! {value, Value}
-    end. 
+    end,
+    loop(Value). 
         
