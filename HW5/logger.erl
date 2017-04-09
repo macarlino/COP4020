@@ -2,16 +2,14 @@
 -export ([start/0]). 
 
 start() ->
-	spawn(fun() -> loop() end).
+	spawn(fun() -> loop/0 end).
 
 loop() ->
 	receive
 		{Pid, log, Entry} ->
-			% um
-		{Pid, fetch}
-			% um
-		{SPid, log_is, Entries}
-			% um
+			Pid ! {SPid, log_is, Entries ++ Entry};
+		{Pid, fetch} ->
+			Pid ! {SPid, log_is, Entries}
 	end,
 	loop().   
  
