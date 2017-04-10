@@ -8,8 +8,8 @@ loop(Entries) ->
 	receive
 		{Pid, log, Entry} ->
 			Pid ! {self(), logged},
-			loop([Entries|Entry]);
+			loop([Entry|Entries]);
 		{Pid, fetch} ->
-			Pid ! {self(), log_is, Entries}
+			Pid ! {self(), log_is, lists:reverse(Entries)}
 	end,
 	loop(Entries).   
