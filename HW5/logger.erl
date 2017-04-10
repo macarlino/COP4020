@@ -7,7 +7,7 @@ start() ->
 loop() ->
 	receive
 		{Pid, log, Entry} ->
-			Pid ! {SPid, log_is, Entries ++ Entry};
+			Pid ! {SPid, logged};
 		{Pid, fetch} ->
 			Pid ! {SPid, log_is, Entries}
 	end,
