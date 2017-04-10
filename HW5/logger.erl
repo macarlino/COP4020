@@ -7,9 +7,9 @@ start() ->
 loop() ->
 	receive
 		{Pid, log, Entry} ->
-			Pid ! {SPid, logged};
+			Pid ! {self(), logged};
 		{Pid, fetch} ->
-			Pid ! {SPid, log_is, Entries}
+			Pid ! {self(), log_is, Entries}
 	end,
 	loop().   
  
