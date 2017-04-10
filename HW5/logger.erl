@@ -2,13 +2,14 @@
 -export ([start/0]). 
 
 start() ->
-	spawn(fun() -> loop(List) end).
+	spawn(fun() -> loop([]) end).
 
-loop(List) ->
+loop(Entries) ->
 	receive
 		{Pid, log, Entry} ->
-			Pid ! {self(), logged};
+			Pid ! {self(), logged},
+			loop([Entries|Entry]);
 		{Pid, fetch} ->
 			Pid ! {self(), log_is, Entries}
 	end,
-	loop().   
+	loop(Entries).   
