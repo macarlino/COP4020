@@ -10,11 +10,10 @@ server(X) ->
 			Pid ! {self(), ok},
 			if X =:= 1 -> 
 				Pid ! {self(), continue};
-				true -> ok  
+				true -> ok
 			end; 
 		{Pid, how_many_running} ->
 			Pid ! {self(), number_running_is, X},
 			server(X)
 	end,
 	server(X-1). 
-	
