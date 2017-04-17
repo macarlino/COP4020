@@ -8,7 +8,7 @@ server(X) ->
 	receive
 		{Pid, done} ->
 			Pid ! {self(), ok},
-			if X =:= 1 -> 
+			if X =:= 0 -> 
 				Pid ! {self(), continue};
 				true -> ok
 			end; 
