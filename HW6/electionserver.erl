@@ -1,32 +1,36 @@
--module(electionserver). 
--import(server1, [rpc/2]).
--export([vote/2]). 
+-module(electionserver).
+-export([start/0, vote/2, results/1, election/2]).
 
--spec start() -> pid(). 
--spec vote(ES::pid(), Candidate::atom()) -> ok. 
-% -spec results(ES::pid()) -> [{atom(), non_neg_integer()}]. 
+-spec start() -> pid().
+-spec vote(ES::pid(), Candidate::atom()) -> ok.
+-spec results(ES::pid()) -> [{atom(), non_neg_integer()}].
 
 start() ->
-	Map = maps:new().
-	spawn(fun() -> loop() end). 
+	spawn(?MODULE, election, [[], [{}]]).
 
-vote(ES, Candidate) -> rpc(electionserver, {vote, Candidate}).
-results(ES) -> {list_is, Lst} = rpc(electionserver, getList), List.
+election(Candidates, Pairs) ->
+	receive
+		{Pid, get} ->
+			Pid ! {Pairs};
 
-init() -> [].
-
-handle({vote, Candidate}, Lst) -> {ok,map.put(Candidate)}
-
-
-
-%vote(Pid, name) ->
-%	receive
-%		{Pid, name} ->
-%			Pid ! {self(), ok},
-%			end;
-%	end,
-%	vote(Pid, name).	
-			 
-
-% results(Pid) ->
+		{Pid, Candidate} ->
+			Pid ! {ok},
+			case lists:member(Candidate, Candidates) of
+				true ->
+					election(Candidates, [{Name, Num+1} || {Name, Num} <- Pairs, Name =:= Candidate]);
+				false -> 
+					election(Candidates ++ [Candidate], Pairs ++ {Candidate, 1})
+			end
+	end.
 	
+vote(ES, Candidate) ->
+	ES ! {Candidate},
+	ES ! {ok}.
+
+results(ES) ->
+	ES ! {self(), get},
+	receive
+		{Pairs} ->
+			[ES ! {X} || X <- Pairs]
+	end.
+
